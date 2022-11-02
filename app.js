@@ -3,17 +3,19 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const date = require(__dirname+"/date.js");
 const _ = require("lodash");
+const dotenv = require('dotenv');
 
 const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+dotenv.config();
 
 // let items = ["Buy food","Cook food","eat food"];
 // let workItems = [];
-
+var url = process.env.MONGO_URI;
 // connection
-mongoose.connect("mongodb+srv://guhan:guhan007@cluster0.svllg.mongodb.net/todolistDB", {useNewUrlParser: true});
+mongoose.connect(url, {useNewUrlParser: true});
 
 // Schema
 const itemsSchema = {
